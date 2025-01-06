@@ -1,12 +1,17 @@
 # Vite Plugin Replace2
 
-A fork of vite-plugin-replace with enhanced features and active maintenance. This plugin allows you to replace text in source code before bundling.
+| package | version | downloads | license |
+| :---: | :---: | :---: | :---: |
+| vite-plugin-replace2 | ![NPM Version](https://img.shields.io/npm/v/vite-plugin-replace2) | ![NPM Downloads](https://img.shields.io/npm/dm/vite-plugin-replace2) | ![NPM License](https://img.shields.io/npm/l/vite-plugin-replace2) |
+| vite-plugin-replace | ![NPM Version](https://img.shields.io/npm/v/vite-plugin-replace) | ![NPM Downloads](https://img.shields.io/npm/dm/vite-plugin-replace) | ![NPM License](https://img.shields.io/npm/l/vite-plugin-replace) |
+
+vite-plugin-replace 下载量还不少，但是作者已经不维护了，所以 fork 了原作者的代码，并进行了一些改进。
 
 ## Features
 
 - Support both string and RegExp patterns
 - Support function replacements
-- Exclude files/directories from processing
+- **Exclude files/directories from processing**
 - TypeScript support
 - Compatible with Vite 2.x
 
