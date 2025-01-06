@@ -2,10 +2,10 @@
 
 | package | version | downloads | license |
 | :---: | :---: | :---: | :---: |
-| vite-plugin-replace2 | ![NPM Version](https://img.shields.io/npm/v/vite-plugin-replace2) | ![NPM Downloads](https://img.shields.io/npm/dm/vite-plugin-replace2) | ![NPM License](https://img.shields.io/npm/l/vite-plugin-replace2) |
-| vite-plugin-replace | ![NPM Version](https://img.shields.io/npm/v/vite-plugin-replace) | ![NPM Downloads](https://img.shields.io/npm/dm/vite-plugin-replace) | ![NPM License](https://img.shields.io/npm/l/vite-plugin-replace) |
+| [vite-plugin-replace2](https://github.com/Keystion/vite-plugin-replace2) | ![NPM Version](https://img.shields.io/npm/v/vite-plugin-replace2) | ![NPM Downloads](https://img.shields.io/npm/dm/vite-plugin-replace2) | ![NPM License](https://img.shields.io/npm/l/vite-plugin-replace2) |
+| [vite-plugin-replace](https://github.com/leanupjs/vite-plugin-replace) | ![NPM Version](https://img.shields.io/npm/v/vite-plugin-replace) | ![NPM Downloads](https://img.shields.io/npm/dm/vite-plugin-replace) | ![NPM License](https://img.shields.io/npm/l/vite-plugin-replace) |
 
-vite-plugin-replace 下载量还不少，但是作者已经不维护了，所以 fork 了原作者的代码，并进行了一些改进。
+[vite-plugin-replace](https://github.com/leanupjs/vite-plugin-replace) has quite a few downloads, but the author no longer maintains it, so I forked the original author's code and made some improvements.
 
 ## Features
 
