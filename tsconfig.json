@@ -7,14 +7,23 @@
     "sourceMap": true,
     "strict": true,
     "outDir": "./",
-    "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
     "module": "UMD",
     "removeComments": true,
-    "target": "ES5",
+    "target": "ES2015",
     "types": [],
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "ES2015"
+    ]
   },
-  "include": ["src/index.ts"],
-  "exclude": ["node_modules/**/*", "src/**/*.test.ts"]
+  "include": [
+    "src/index.ts"
+  ],
+  "exclude": [
+    "node_modules/**/*",
+    "src/**/*.test.ts"
+  ]
 }

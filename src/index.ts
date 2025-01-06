@@ -2,12 +2,35 @@ import type { UserConfig, Plugin } from "vite";
 
 // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 interface ViteReplacement {
+  /**
+   * The string and RegExp types are supported
+   * @example
+   * ```ts
+   * { from: "__CLI_NAME__", to: "vite-plugin-replace2" }
+   * { from: /__CLI_VERSION__/g, to: "$0.1.2" }
+   * { from: new RegExp("__CLI_VERSION__", "g"), to: "$0.1.2" }
+   * ```
+   */
   from: string | RegExp;
+  /**
+   * The string and Function types are supported
+   * @example
+   * ```ts
+   * { from: "__CLI_NAME__", to: "vite-plugin-replace2" }
+   * { from: /__CLI_VERSION__/g, to: "$0.1.2" }
+   * { from: new RegExp("__CLI_VERSION__", "g"), to: "$0.1.2" }
+   * ```
+   */
   to: string | Function;
 }
 
 export interface VitePluginReplaceConfig {
   replacements: ViteReplacement[];
+  /**
+   * The string and string[] types are supported
+   */
+  exclude?: string | string[];
+  [key: string]: any;
 }
 
 function execSrcReplacements(src: string, replacements: ViteReplacement[]) {
@@ -47,9 +70,29 @@ export function replaceCodePlugin(config: VitePluginReplaceConfig): Plugin {
       `[vite-plugin-replace]: The configuration option 'replacement' is not of type 'Array'.`
     );
   }
+
+  /**
+   * Process exclude configuration
+   * The string and string[] types are supported
+   */
+  const excludePatterns = Array.isArray(config.exclude)
+    ? config.exclude
+    : config.exclude
+    ? [config.exclude]
+    : [];
+
   return {
     name: "transform-file",
-    transform(src) {
+    /**
+     * @param src file content
+     * @param id file path
+     * @returns
+     */
+    transform(src: string, id: string) {
+      if (excludePatterns.some((pattern) => id.includes(pattern))) {
+        return null;
+      }
+
       return {
         code: execSrcReplacements(src, config.replacements),
         map: null,

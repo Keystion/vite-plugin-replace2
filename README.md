@@ -1,38 +1,33 @@
-# Vite Plugin Replace
+# Vite Plugin Replace2
 
-With this plugin text in sourcecode could be replaced before bundling.
+A fork of vite-plugin-replace with enhanced features and active maintenance. This plugin allows you to replace text in source code before bundling.
 
-## Motivation
+## Features
 
-The initial reason for implementing a new plugin to replace it was that the approach of [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace) is not flexible enough. So we looked at what [JavaScript replace](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/String/replace) actually offers us.
-
-### Declaration of the Replacement (interface):
-
-```ts
-interface Replacement {
-  from: RegExp | string;
-  to: string | Function
-}
-```
-
-| Attribute | Type | Description |
-| -- | -- | -- |
-| `from` | `regexp` \| `string` | 
-| `to` | `string` \| `string` |
+- Support both string and RegExp patterns
+- Support function replacements
+- Exclude files/directories from processing
+- TypeScript support
+- Compatible with Vite 2.x
 
 ## Installation
 
 ```bash
-npm i -D vite-plugin-replace
+npm i -D vite-plugin-replace2
+# or
+pnpm add -D vite-plugin-replace2
+# or
+yarn add -D vite-plugin-replace2
 ```
 
 ## Usage
 
-```js
+```ts
+import { replaceCodePlugin } from "vite-plugin-replace2";
+import { defineConfig } from "vite";
 import packageJson from "./package.json";
-import { replaceCodePlugin } from "vite-plugin-replace";
 
-module.exports = mergeConfig(config, {
+export default defineConfig({
   plugins: [
     replaceCodePlugin({
       replacements: [
@@ -44,8 +39,83 @@ module.exports = mergeConfig(config, {
           from: /__CLI_VERSION__/g,
           to: packageJson.version,
         },
+        {
+          // Using function replacement
+          from: /__DATE__/g,
+          to: () => new Date().toISOString(),
+        },
       ],
+      exclude: ["node_modules"], // Optional: exclude directories
     }),
   ],
 });
 ```
+
+## Configuration
+
+### VitePluginReplaceConfig
+
+```ts
+interface VitePluginReplaceConfig {
+  replacements: ViteReplacement[];
+  exclude?: string | string[];
+}
+
+interface ViteReplacement {
+  from: string | RegExp;  // Pattern to match
+  to: string | Function;  // Replacement string or function
+}
+```
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `replacements` | `Array` | Array of replacement rules |
+| `exclude` | `string \| string[]` | Files/directories to exclude from processing |
+
+### Replacement Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `from` | `string \| RegExp` | String or RegExp pattern to match |
+| `to` | `string \| Function` | Replacement value or function |
+
+## Examples
+
+### Using String Replacement
+
+```ts
+{
+  from: "__VERSION__",
+  to: "1.0.0"
+}
+```
+
+### Using RegExp
+
+```ts
+{
+  from: /__VERSION__/g,
+  to: "1.0.0"
+}
+```
+
+### Using Function Replacement
+
+```ts
+{
+  from: /__TIMESTAMP__/g,
+  to: () => Date.now().toString()
+}
+```
+
+## License
+
+MIT
+
+## Contributing
+
+Issues and PRs are welcome!
+
+## Thanks
+
+- [vite-plugin-replace](https://github.com/leanupjs/vite-plugin-replace)
